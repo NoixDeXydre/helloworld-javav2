@@ -8,3 +8,22 @@ on:
       
 env:
   DEPLOY_ENV: production
+  
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: "Préparation JDK"
+    steps:
+    - uses: actions/checkout@v6.1.0
+    - name: Set up JDK 17
+      uses: actions/setup-java@v6.2.0
+      with:
+        java-version: '17'
+        distribution: "temurin"
+    - name: Build
+      run: mvn clean package -DSkipTests
+    - name: Upload Maven build artifact
+      uses: actions/upload-artifact@v5.0.0
+      with:
+        name: artifact
+        path: ./target/helloworld.jar
