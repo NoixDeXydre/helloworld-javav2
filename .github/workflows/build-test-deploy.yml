@@ -1,1 +1,10 @@
+name: "Construction, Tests et Déploiement"
 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      
+env:
+  DEPLOY_ENV: production
